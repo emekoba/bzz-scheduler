@@ -1,6 +1,8 @@
+import { Media } from './entities/media.entity';
+
 export const ModuleConfigs = {
   app: {
-    entities: [],
+    entities: [Media],
   },
 };
 

@@ -1,9 +1,16 @@
 import { Module } from '@nestjs/common';
+import { ScheduleModule } from '@nestjs/schedule';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { GET_ALL_ENTITIES } from './contants';
+import { configService } from './services/config.service';
 
 @Module({
-  imports: [],
+  imports: [
+    // TypeOrmModule.forRoot(configService.getTypeOrmConfig(GET_ALL_ENTITIES())),
+    ScheduleModule.forRoot(),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

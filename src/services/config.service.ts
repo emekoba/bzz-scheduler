@@ -3,18 +3,13 @@ require('dotenv').config();
 
 class ConfigService {
   public getTypeOrmConfig(entities: any): TypeOrmModuleOptions {
-    const {
-      ENVIRONMENT,
-      USE_SSL,
-      SSL_AUTHORIZE,
-      DB_SYNC,
-      PORT: port,
-    } = process.env;
+    const { ENVIRONMENT, USE_SSL, SSL_AUTHORIZE, DB_SYNC } = process.env;
     const {
       [`${ENVIRONMENT}_DB_USERNAME`]: username,
       [`${ENVIRONMENT}_DB_PASSWORD`]: password,
       [`${ENVIRONMENT}_DB_HOST`]: host,
       [`${ENVIRONMENT}_DB_NAME`]: database,
+      [`${ENVIRONMENT}_DB_PORT`]: port,
     } = process.env;
 
     return {
@@ -27,7 +22,7 @@ class ConfigService {
       type: 'mysql',
       synchronize: DB_SYNC === 'true' ? true : false,
       extra:
-        USE_SSL === 'true' && ENVIRONMENT !== 'DEV'
+        USE_SSL === 'true' && ENVIRONMENT !== 'DEVELOPMENT'
           ? {
               ssl: {
                 rejectUnauthorized: SSL_AUTHORIZE === 'true' ? true : false,

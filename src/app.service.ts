@@ -15,7 +15,7 @@ export class AppService {
   }
 
   @Cron(CronExpression.EVERY_5_MINUTES)
-  fetchIntagramData() {
+  async fetchIntagramData() {
     const resp = axios.get(this.instagramURL, {
       headers: {},
     });

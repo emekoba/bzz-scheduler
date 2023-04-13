@@ -8,11 +8,15 @@ import { configService } from './services/config.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(configService.getTypeOrmConfig(GET_ALL_ENTITIES())),
-    TypeOrmModule.forFeature(ModuleConfigs['app'].entities),
-    ScheduleModule.forRoot(),
+    // TypeOrmModule.forRoot(configService.getTypeOrmConfig(GET_ALL_ENTITIES())),
+    // TypeOrmModule.forFeature(ModuleConfigs['app'].entities),
+    // ScheduleModule.forRoot(),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [
+    // AppController
+  ],
+  providers: [
+    // AppService
+  ],
 })
 export class AppModule {}

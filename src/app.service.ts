@@ -3,10 +3,16 @@ import { Cron, CronExpression } from '@nestjs/schedule/dist';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Media } from './entities/media.entity';
+import { SocialConnection } from './entities/socialConnections.entity';
 import axios from 'axios';
+
 @Injectable()
 export class AppService {
-  constructor(@InjectRepository(Media) private mediaRepo: Repository<Media>) {}
+  constructor(
+    @InjectRepository(Media) private mediaRepo: Repository<Media>,
+    @InjectRepository(SocialConnection)
+    private connectionsRepo: Repository<Media>,
+  ) {}
 
   instagramURL = '';
 
@@ -16,6 +22,8 @@ export class AppService {
 
   @Cron(CronExpression.EVERY_5_MINUTES)
   async fetchIntagramData() {
+    const connections = await this.connectionsRepo.find();
+
     const resp = axios.get(this.instagramURL, {
       headers: {},
     });
